@@ -1,0 +1,22 @@
+div{
+  color: var(--primary-rose);
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .rotating {
+    animation: rotate 1s linear infinite;
+    font-size: 100px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

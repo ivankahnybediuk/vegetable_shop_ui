@@ -1,0 +1,28 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  background-color: #ffffff;
+  width: 100%;
+  top: 0;
+}
+.logo{
+  padding: 10px 30px;
+}
+.btn_conatiner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin{
+  padding: 10px;
+  cursor: pointer;
+  &:hover{
+    text-shadow:  2px 4px var(--background-green);
+  }
+  span{
+    color: var(--primary-green);
+    font-size: 40px;
+  }
+}

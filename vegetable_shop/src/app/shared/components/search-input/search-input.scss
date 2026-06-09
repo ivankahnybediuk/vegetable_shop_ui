@@ -1,0 +1,31 @@
+.search-wrapper{
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  width: 400px;
+  span{
+    color: var(--primary-green);
+    font-size: 40px;
+  }
+  .search-input{
+    border: none;
+    font-size: 18px;
+    color: var(--text-dark);
+    width: 100%;
+
+    &:focus{
+      border: none;
+      outline: none;
+    }
+    &:hover{
+      border: none;
+    }
+    &::placeholder{
+      color: var(--text-light);
+    }
+  }
+}

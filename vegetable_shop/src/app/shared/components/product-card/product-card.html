@@ -1,0 +1,27 @@
+<div class="wrapper">
+  @if(product()?.imageUrl){
+    <img [src]="product()?.imageUrl" [alt]="product()?.name">
+  } @else{
+    <img src="assets/images/no_image.png" [alt]="product()?.name">
+  }
+  <div class="text_container">
+    <div class="description">
+      <p class="name">{{product()?.name}}</p>
+      <p class="units">1{{product()?.unit?.toLowerCase()}}</p>
+    </div>
+    <div class="price">
+      {{product()?.price| currency:'EUR'}}
+    </div>
+  </div>
+  <div class="purchase_container">
+    <div class="quantity">
+      <button (click)="reduceQuantity()" [ngClass]="{'inactive': this.quantity == 0}">-</button>
+      <input type="number" [(ngModel)]="quantity")]>
+      <button (click)="addQuantity()" [ngClass]="{'inactive' : product()!.stockQuantity <= quantity}" ]>+</button>
+    </div>
+    <button id="add_to_cart" (click)="addToCart()">
+      <span>Add to cart </span>
+      <span class="material-symbols-outlined">add_shopping_cart</span></button>
+  </div>
+
+</div>

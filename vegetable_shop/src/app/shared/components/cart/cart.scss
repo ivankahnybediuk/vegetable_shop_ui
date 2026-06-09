@@ -1,0 +1,23 @@
+.cart{
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  span{
+    color: var(--primary-green);
+    font-size: 40px;
+  }
+  .items_counter{
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--primary-rose);
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    top: auto;
+    bottom: 10px;
+  }
+}

@@ -1,0 +1,20 @@
+
+
+:root{
+
+  /*colors*/
+  --primary-rose: #F2274D;
+  --primary-green: #192F14;
+  --secondary-green: #4A7E0F;
+  --text-light: #BEBDBD;
+  --text-dark: #3F3C3C;
+  --background-rose: #FCE7E5;
+  --background-green: #F1F0E4;
+  --background-yellow: #FEF0DF ;
+
+
+  /*borders*/
+  --border-light: #BEBDBD;
+  --border-radius: 10px;
+  --border: var(--border-light) 1px solid;
+}

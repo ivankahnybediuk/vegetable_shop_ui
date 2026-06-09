@@ -1,0 +1,13 @@
+<div class="wrapper">
+  @for(product of products(); track product.id){
+    <app-product-card [product]="product"></app-product-card>
+  } @empty {
+    @if(!isProductsLoading()){
+      There is no such product
+    }
+  }
+</div>
+@if(isProductsLoading()){
+  <app-spinner></app-spinner>
+}
+

@@ -1,0 +1,33 @@
+<div class="poster_wrapper" style="background-image: url('../assets/images/main_page_img.png')">
+  <div class="poster_text_wrapper">
+    <h5>
+      <span class="material-symbols-outlined">temp_preferences_eco</span>
+      <p>FRESH. NATURAL. DELICIOUS.</p>
+    </h5>
+    <h1>
+      <p>The best</p>
+      <p id="rose">nature has to offer,</p>
+      <p>directly to you table.</p>
+    </h1>
+    <p id="grey_text">
+      Fresh fruits and vegetables, carefully picked, so you can enjoy flavor, health and quality.
+    </p>
+    <button id ="shop_btn" (click) = "scrollToProducts()">
+      Shop now
+      <span class="material-symbols-outlined">arrow_right_alt</span>
+    </button>
+  </div>
+</div>
+
+@if(isCategoriesLoading()){
+  <app-spinner></app-spinner>
+} @else{
+  <div class="categories_wrapper">
+    <app-category-card></app-category-card>
+    @for (category of categories(); track category.id) {
+      <app-category-card [category] = "category"></app-category-card>
+    }
+  </div>
+}
+
+<app-products id="products"></app-products>

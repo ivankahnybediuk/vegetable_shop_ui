@@ -1,0 +1,11 @@
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 30px;
+
+  app-product-card{
+    width: 25%;
+  }
+}
