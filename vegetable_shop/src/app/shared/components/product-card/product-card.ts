@@ -43,9 +43,8 @@ export class ProductCard {
   addToCart(){
     if(this.quantity > 0){
       if(this.quantity <= this.product()!.stockQuantity ){
-        this.cartService.changeQuantity(this.product()!.id, this.quantity);
+        this.cartService.changeQuantity(this.product()!, this.quantity);
       }
     }
-    console.log(this.cartService.products());
   }
 }

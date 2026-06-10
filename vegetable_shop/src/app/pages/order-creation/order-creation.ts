@@ -6,6 +6,8 @@ import {CartService} from '../../core/services/cart-service';
 import {Product} from '../../core/models/Product';
 import {CartProduct} from '../../core/models/CartProduct';
 import {Router} from '@angular/router';
+import {OrderService} from '../../core/services/order-service';
+import {ICartItem} from '../../core/models/interfaces/ICartItem';
 
 @Component({
   selector: 'app-order-creation',
@@ -21,6 +23,7 @@ export class OrderCreation {
   private fb = inject(FormBuilder);
   private cartService: CartService = inject(CartService);
   private router: Router = inject(Router);
+  private orderService: OrderService = inject(OrderService);
 
   public orderItems = this.cartService.cartItems;
 
@@ -44,7 +47,37 @@ export class OrderCreation {
   }
 
   submitOrder() {
+    if (this.checkoutForm.invalid) {
+      this.checkoutForm.markAllAsTouched();
+      return;
+    }
 
+    const order: Order = {
+      name: this.checkoutForm.controls.firstName.value,
+      lastname: this.checkoutForm.controls.lastName.value,
+      email: this.checkoutForm.controls.email.value,
+      phone: this.checkoutForm.controls.phone.value,
+      address: this.checkoutForm.controls.deliveryAddress.value,
+
+      items: this.orderItems().map(item => ({
+        productId: item.product.id,
+        quantity: item.quantity
+      } as ICartItem))
+    };
+
+    this.orderService.createOrder(order).subscribe({
+      next: (order) => {
+        this.cartService.clearCart();
+        this.router.navigate(['/success'], {
+          state: {
+            order: order
+          }
+        });
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
   navigateToHome() {

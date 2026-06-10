@@ -6,7 +6,6 @@
     placeholder="Search products..."
     [(ngModel)]="searchText"
     (input)="onSearchChange()"
-    (focusout)="cleanSearch()"
     (keydown.enter)="reloadProducts()"
   />
 

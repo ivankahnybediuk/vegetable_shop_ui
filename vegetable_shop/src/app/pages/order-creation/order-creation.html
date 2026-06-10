@@ -5,7 +5,7 @@
       <p>Please fill in your details and review your order.</p>
     </section>
 
-    <form class="checkout-grid" [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
+    <form class="checkout-container" [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
       <section class="form">
         <div class="field">
           <label>First name</label>
@@ -54,12 +54,14 @@
         <div class="order-head">
           <span>Product</span>
           <span>Price</span>
+          <span>Quantity</span>
         </div>
 
         @for (item of orderItems(); track item.product.id){
           <div class="order-item">
             <span>{{ item.product.name }} ({{ item.product.unit.toLowerCase() }})</span>
-            <strong>{{ item.product.price | currency:'EUR':'symbol':'1.2-2' }}</strong>
+            <span>{{ item.product.price | currency:'EUR':'symbol':'1.2-2' }}</span>
+            <span>{{ item.quantity }}</span>
           </div>
         }
 
@@ -67,11 +69,11 @@
           <span>Total</span>
           <strong>{{ total | currency:'EUR':'symbol':'1.2-2' }}</strong>
         </div>
+        <div class="actions">
+          <button type="submit">Send Order</button>
+        </div>
       </aside>
 
-      <div class="actions">
-        <button type="submit">Send Order</button>
-      </div>
     </form>
   </main>
 } @else {

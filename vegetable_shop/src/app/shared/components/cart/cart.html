@@ -1,4 +1,4 @@
-<div class="cart">
+<div class="cart" (click)="navigateToOrder()">
   <span class="material-symbols-outlined">shopping_cart</span>
   @if (cart().size > 0){
     <div class="items_counter">{{cart().size}}</div>

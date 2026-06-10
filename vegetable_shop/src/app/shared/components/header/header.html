@@ -3,7 +3,9 @@
     <img src="assets/images/logo.svg" alt="logo" width="200" height="70"/>
   </div>
   <div class="btn_conatiner">
-    <app-search-input></app-search-input>
+    @if(currentUrl() == '/home'){
+      <app-search-input></app-search-input>
+    }
     <div class="admin">
       <span class="material-symbols-outlined">shield_person</span>
     </div>

@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ProductService} from '../../../core/services/product-service';
 import {Product} from '../../../core/models/Product';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-input',
@@ -13,6 +14,7 @@ import {Product} from '../../../core/models/Product';
 })
 export class SearchInput {
   private productService: ProductService = inject(ProductService);
+  private router: Router = inject(Router);
 
   public suggestions = this.productService.searchResult;
   searchText: string = "";

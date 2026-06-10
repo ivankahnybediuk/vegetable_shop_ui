@@ -27,7 +27,7 @@ export class ProductService {
   loadProducts(categoryId: number) {
     if(this._isLoading()) return;
 
-    if(categoryId != 0 && categoryId != this._categoryId){
+    if(categoryId != this._categoryId){
       this._categoryId = categoryId;
       this._currentPage = 0;
       this._totalPages =1;
