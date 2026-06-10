@@ -3,19 +3,24 @@
   <input
     type="text"
     class="search-input"
-    placeholder="Search products..."/>
-<!--    [(ngModel)]="searchText"-->
-<!--    (input)="onSearchChange()"-->
+    placeholder="Search products..."
+    [(ngModel)]="searchText"
+    (input)="onSearchChange()"
+    (focusout)="cleanSearch()"
+    (keydown.enter)="reloadProducts()"
+  />
 
 
-<!--  @if (false) {-->
-<!--    <ul class="suggestions-list">-->
-<!--      @for (product of suggestions; track product.id) {-->
-<!--        <li class="suggestion-item">-->
-<!--          {{ product.name }}-->
-<!--        </li>-->
-<!--      }-->
-<!--    </ul>-->
-<!--  }-->
-  <span class="material-symbols-outlined search-icon">search</span>
+  @if (suggestions().length) {
+    <ul class="suggestions-list">
+      @for (product of suggestions(); track product) {
+        <li class="suggestion-item" (click)="choseSuggestion(product)" )>
+          {{ product }}
+        </li>
+      }
+    </ul>
+  }
+  <button (click) = "reloadProducts()">
+    <span class="material-symbols-outlined">search</span>
+  </button>
 </div>

@@ -17,6 +17,9 @@ export class ProductService {
   private readonly _isLoading = signal<boolean>(false);
   public readonly isLoading = this._isLoading.asReadonly();
 
+  private readonly _searchResult = signal<string[]>([]);
+  public readonly searchResult = this._searchResult.asReadonly();
+
   private _currentPage: number = 0;
   private _totalPages: number = 1;
   private _categoryId: number = 0;
@@ -74,6 +77,41 @@ export class ProductService {
         this._isLoading.set(false)
       }
     })
+  }
+
+  public searchProducts(name: string){
+    if(name == null || name == ""|| name.length < 3){
+      this._searchResult.set([]);
+      return;
+    }
+    this.http.get<IPaginatedResult<IProduct>>(environment.apiUrl + '/products/search?name=' + name).subscribe({
+      next: (response) => {
+        this._searchResult.set(response.items.map(i => i.name))
+      },
+      error: (err) => {
+        console.error('Failed to load products', err);
+      }
+    })
+  }
+
+  public loadProductsByName(name: string){
+    this._searchResult.set([]);
+
+    this.http.get<IPaginatedResult<IProduct>>(environment.apiUrl + '/products/search?name=' + name).subscribe({
+      next: (response) => {
+        this._products.set(response.items.map(i => new Product(i)));
+        this._currentPage = response.page;
+        this._totalPages = response.totalPages;
+        setTimeout(() => {
+          this._isLoading.set(false);
+        }, 5000);
+      },
+      error: (err) => {
+        console.error('Failed to load products', err);
+        this._isLoading.set(false)
+      }
+    })
+
   }
 
 

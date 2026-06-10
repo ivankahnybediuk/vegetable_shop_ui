@@ -1,4 +1,4 @@
-import {Component, computed, inject, input} from '@angular/core';
+import {Component, computed, inject, input, signal} from '@angular/core';
 import {Product} from '../../../core/models/Product';
 import {CurrencyPipe, NgClass} from '@angular/common';
 import {UnitsType} from '../../../core/models/enums/UnitsType';
@@ -20,6 +20,7 @@ export class ProductCard {
   private cartService: CartService = inject(CartService);
   public product = input<Product>();
   public quantity:number = 0;
+  public imageLoaded = signal(false);
 
   ngOnInit() {
     this.quantity = this.cartService.products().get(this.product()!.id)?.quantity ?? 0;

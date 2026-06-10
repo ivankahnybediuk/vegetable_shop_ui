@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {ProductService} from '../../../core/services/product-service';
+import {Product} from '../../../core/models/Product';
 
 @Component({
   selector: 'app-search-input',
@@ -9,4 +11,44 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './search-input.html',
   styleUrl: './search-input.scss',
 })
-export class SearchInput {}
+export class SearchInput {
+  private productService: ProductService = inject(ProductService);
+
+  public suggestions = this.productService.searchResult;
+  searchText: string = "";
+
+  onSearchChange() {
+    this.productService.searchProducts(this.searchText);
+  }
+  ngOnInit() {
+    this.suggestions = this.productService.searchResult;
+  }
+
+  cleanSearch() {
+    this.searchText = "";
+    this.onSearchChange();
+  }
+
+  reloadProducts() {
+    this.productService.loadProductsByName(this.searchText);
+    this.scrollToProducts();
+    this.cleanSearch();
+    (document.activeElement as HTMLElement)?.blur();
+  }
+
+  choseSuggestion(product: string) {
+    this.searchText = product;
+    this.reloadProducts();
+  }
+
+  scrollToProducts(): void {
+    const element = document.getElementById('products');
+
+    if (!element) return;
+
+    window.scrollTo({
+      top: element.offsetTop,
+      behavior: 'smooth'
+    });
+  }
+}

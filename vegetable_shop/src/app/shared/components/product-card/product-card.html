@@ -1,9 +1,18 @@
 <div class="wrapper">
   @if(product()?.imageUrl){
-    <img [src]="product()?.imageUrl" [alt]="product()?.name">
+    @if (!imageLoaded()) {
+      <div class="image-skeleton"></div>
+    }
+    <img
+      [src]="product()?.imageUrl"
+      [alt]="product()?.name"
+      [class.loaded]="imageLoaded()"
+      (load)="imageLoaded.set(true)"
+      (error)="imageLoaded.set(true)">
   } @else{
-    <img src="assets/images/no_image.png" [alt]="product()?.name">
+    <img class="loaded" src="assets/images/no_image.png" [alt]="product()?.name">
   }
+
   <div class="text_container">
     <div class="description">
       <p class="name">{{product()?.name}}</p>

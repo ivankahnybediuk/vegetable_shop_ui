@@ -1,11 +1,13 @@
 .wrapper{
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: stretch;
   flex-wrap: wrap;
-  padding: 30px;
+  gap: 10px;
+
+  padding: 30px 70px;
 
   app-product-card{
-    width: 25%;
+    width: calc((100% - 30px) / 4);
   }
 }

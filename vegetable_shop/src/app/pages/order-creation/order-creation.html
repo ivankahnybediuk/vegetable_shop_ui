@@ -1,0 +1,82 @@
+@if (orderItems().length){
+  <main class="checkout">
+    <section class="intro">
+      <h1>Checkout</h1>
+      <p>Please fill in your details and review your order.</p>
+    </section>
+
+    <form class="checkout-grid" [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
+      <section class="form">
+        <div class="field">
+          <label>First name</label>
+          <input formControlName="firstName" placeholder="Enter your first name" />
+          @if (hasError('firstName')){
+            <small>First name is required</small>
+          }
+        </div>
+
+        <div class="field">
+          <label>Last name</label>
+          <input formControlName="lastName" placeholder="Enter your last name" />
+          @if (hasError('lastName')){
+            <small>Last name is required</small>
+          }
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+          <input formControlName="phone" type="tel" placeholder="Enter your phone number" />
+          @if (hasError('phone')){
+            <small>Phone is required</small>
+          }
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input formControlName="email" type="email" placeholder="Enter your email address" />
+          @if (hasError('email')){
+            <small>Valid email is required</small>
+          }
+        </div>
+
+        <div class="field full">
+          <label>Delivery address</label>
+          <textarea formControlName="deliveryAddress" placeholder="Enter your delivery address"></textarea>
+          @if (hasError('deliveryAddress')){
+            <small>Delivery address is required</small>
+          }
+        </div>
+      </section>
+
+      <aside class="order-card">
+        <h2>Your order</h2>
+
+        <div class="order-head">
+          <span>Product</span>
+          <span>Price</span>
+        </div>
+
+        @for (item of orderItems(); track item.product.id){
+          <div class="order-item">
+            <span>{{ item.product.name }} ({{ item.product.unit.toLowerCase() }})</span>
+            <strong>{{ item.product.price | currency:'EUR':'symbol':'1.2-2' }}</strong>
+          </div>
+        }
+
+        <div class="total">
+          <span>Total</span>
+          <strong>{{ total | currency:'EUR':'symbol':'1.2-2' }}</strong>
+        </div>
+      </aside>
+
+      <div class="actions">
+        <button type="submit">Send Order</button>
+      </div>
+    </form>
+  </main>
+} @else {
+  <div class="empty_wrapper">
+    <h1>The cart is empty</h1>
+    <button (click)="navigateToHome()" >Go back to shopping <span class="material-symbols-outlined">arrow_forward</span></button>
+  </div>
+}
